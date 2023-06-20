@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Carga automatica 2.0</h1>
+        
+        <form method="POST" action="proceso1.py">
+            <div class="form-group">
+                <label for="status">Estado:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" id="vigenteRadio" value="1" checked>
+                    <label class="form-check-label" for="vigenteRadio">
+                        Vigente
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" id="castigoRadio" value="2">
+                    <label class="form-check-label" for="castigoRadio">
+                        Castigo
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" id="renegociadoRadio" value="3">
+                    <label class="form-check-label" for="renegociadoRadio">
+                        Renegociado
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="validarButton">Validar</button>
+        </form>
+
+        <div id="resultadoContainer">
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <py-config>
+        packages = ["", ""]
+      </py-config>
+
+    <div class="container">
+        <h1>Carga automatica 2.0</h1>
+        
+        <form>
+            <div class="form-group">
+                <label for="status">Estado:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" id="vigenteRadio" value="1" checked>
+                    <label class="form-check-label" for="vigenteRadio">
+                        Vigente
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" id="castigoRadio" value="2">
+                    <label class="form-check-label" for="castigoRadio">
+                        Castigo
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" id="renegociadoRadio" value="3">
+                    <label class="form-check-label" for="renegociadoRadio">
+                        Renegociado
+                    </label>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" py-click="execute()" id="validarButton">Validar</button>
+        </form>
+        <py-script>
+            import pyodbc
+            import json
+            import os
+            
+            def execute():
+
+                # Establecer la conexión con la base de datos SQL Server
+                server = os.environ.get('DB_SERVER')
+                database = os.environ.get('DB_DATABASE')
+                username = os.environ.get('DB_USERNAME')
+                password = os.environ.get('DB_PASSWORD')
+
+                conn = pyodbc.connect(
+                    f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}'
+                )
+
+                # Obtener el valor seleccionado del radio button
+                status = input('Estado (1: Vigente, 2: Castigo, 3: Renegociado): ')
+
+                # Ejecutar el proceso almacenado
+                cursor = conn.cursor()
+                cursor.execute('EXECUTE CM_Retorna_PP @Estado = ?', status)
+                row = cursor.fetchone()
+                prioridades = row.Prioridades
+                pagos = row.Pagos
+                rene_ref = row.ReneRef
+
+                # Cerrar la conexión
+                conn.close()
+
+                # Crear un diccionario con los resultados
+                resultado = {
+                    'Prioridades': prioridades,
+                    'Pagos': pagos,
+                    'ReneRef': rene_ref
+                }
+
+                # Convertir el diccionario a formato JSON y mostrarlo
+                resultado_json = json.dumps(resultado)
+                print(resultado_json)
+        </py-script>
+        <div id="resultadoContainer">
+
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>
