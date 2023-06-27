@@ -12,6 +12,7 @@ function enviarRespuesta() {
         var respuesta = JSON.parse(xhr.responseText);
         console.log(respuesta);
         var respuestaContainer = document.getElementById("respuestaContainer");
+        document.getElementById('fecha').style.display = 'block';
         respuestaContainer.innerHTML = 
                                         `
                                             <div class="panel-heading">Resumen</div>
@@ -49,7 +50,6 @@ function enviarRespuesta() {
       if (xhr.readyState == 4 && xhr.status == 200) {
         var respuesta = xhr.responseText;
         console.log(respuesta);
-        var respuestaContainer = document.getElementById("fecha");
         respuestaContainer.innerHTML = respuesta;
         
         respuesta.time + respuesta.resumen;
@@ -79,7 +79,7 @@ function procesarRespuesta() {
         console.log(respuesta);
         var alerta = document.getElementById("alerta");
         alerta.innerHTML = `<div class="alert alert-success">
-                                 <strong>Validación exitosa, duración: ${respuesta.tiempo} </strong> Archivos cargados en FTP
+                                 <strong>Validación exitosa, duración: ${respuesta.tiempo}s </strong> - Archivos cargados en FTP
                             </div>`;
         document.getElementById('myForm').style.display = 'none';
         var proceso = document.getElementById("proceso");
