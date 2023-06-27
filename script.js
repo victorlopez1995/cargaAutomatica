@@ -5,6 +5,7 @@ function enviarRespuesta() {
     var xhr = new XMLHttpRequest();
     var url = "https://prod-19.brazilsouth.logic.azure.com:443/workflows/b871c824c27349e48cf15878fdc9a61f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=qa97c2BOgEry_28qL2uF-qdq2pST1GCVVhs61nDaaa8"; // Reemplaza esto con la URL de tu desencadenador HTTP en Power Automate
     var selectedOption = document.querySelector('input[name="tipo"]:checked').value;
+    document.getElementById('loadingIndicator').style.display = 'block';
     var data = JSON.stringify({
         respuesta: selectedOption
     });
@@ -13,6 +14,7 @@ function enviarRespuesta() {
       if (xhr.readyState == 4 && xhr.status == 200) {
         var respuesta = JSON.parse(xhr.responseText);
         console.log(respuesta);
+        document.getElementById('loadingIndicator').style.display = 'none';
         var respuestaContainer = document.getElementById("respuestaContainer");
         respuestaContainer.innerHTML = 
                                         `
