@@ -12,7 +12,6 @@ function enviarRespuesta() {
         var respuesta = JSON.parse(xhr.responseText);
         console.log(respuesta);
         var respuestaContainer = document.getElementById("respuestaContainer");
-        document.getElementById('fecha').style.display = 'block';
         respuestaContainer.innerHTML = 
                                         `
                                             <div class="panel-heading">Resumen</div>
@@ -20,8 +19,7 @@ function enviarRespuesta() {
                                             <div class="panel-body">Pagos: ${respuesta.resumen.pagos}</div>
                                             <div class="panel-body">ReneRef: ${respuesta.resumen.reneRef}</div>
                                         `
-        
-        respuesta.time + respuesta.resumen;
+      
         // Procesa la respuesta aquí, por ejemplo, actualizando el DOM o almacenándola en una variable
       }
     };
@@ -50,9 +48,9 @@ function enviarRespuesta() {
       if (xhr.readyState == 4 && xhr.status == 200) {
         var respuesta = xhr.responseText;
         console.log(respuesta);
+        var respuestaContainer = document.getElementById("fecha");
         respuestaContainer.innerHTML = respuesta;
         
-        respuesta.time + respuesta.resumen;
         // Procesa la respuesta aquí, por ejemplo, actualizando el DOM o almacenándola en una variable
       }
     };
@@ -101,8 +99,6 @@ function procesarRespuesta() {
                                             <div class="panel-body">Campaña T00: ${respuesta.resumen.campanaT00}</div>
                                             <div class="panel-body">Carga total Vigente: ${respuesta.resumen.cargaTotalVigente}</div>
                                         `
-        
-        respuesta.time + respuesta.resumen;
         // Procesa la respuesta aquí, por ejemplo, actualizando el DOM o almacenándola en una variable
       }
     };
