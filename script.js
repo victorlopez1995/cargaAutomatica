@@ -1,3 +1,5 @@
+let updated = false;
+
 
 function enviarRespuesta() {
     var xhr = new XMLHttpRequest();
@@ -15,9 +17,9 @@ function enviarRespuesta() {
         respuestaContainer.innerHTML = 
                                         `
                                             <div class="panel-heading">Resumen</div>
-                                            <div class="panel-body">Prioridades: ${respuesta.resumen.prioridades}</div>
-                                            <div class="panel-body">Pagos: ${respuesta.resumen.pagos}</div>
-                                            <div class="panel-body">ReneRef: ${respuesta.resumen.reneRef}</div>
+                                            <div class="panel-body">${respuesta.ftp.prioridades}: ${respuesta.resumen.prioridades} - carga: ${respuesta.tiempo.prioridades}</div>
+                                            <div class="panel-body">${respuesta.ftp.pagos}: ${respuesta.resumen.pagos} - carga: ${respuesta.tiempo.pagos}</div>
+                                            <div class="panel-body">${respuesta.ftp.reneRef}: ${respuesta.resumen.reneRef} - carga: ${respuesta.tiempo.reneRef}</div>
                                         `
       
         // Procesa la respuesta aquí, por ejemplo, actualizando el DOM o almacenándola en una variable
@@ -34,22 +36,28 @@ function enviarRespuesta() {
     // });
   
     xhr.send(data);
-    obtenerFecha();
+    // obtenerFecha();
   }
 
-  function obtenerFecha(){
+  function UpdatePowerBi(){
+    if (updated){
+      revisarRespuesta();
+    } else {
     var xhr = new XMLHttpRequest();
     var url = "https://prod-09.brazilsouth.logic.azure.com:443/workflows/1cded6dc2a7740c9aca72ca89c03624b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Yg0eAqd8zlyeH4WzSVY1LYCBQrD7sp1iNGjhJa9MAVE"; // Reemplaza esto con la URL de tu desencadenador HTTP en Power Automate
+    document.getElementById('loadingIndicatorPower').style.display = 'block';
     var data = JSON.stringify({
-      respuesta: "fecha"
+      respuesta: "respuesta"
   });
     
     xhr.onreadystatechange = function() {
       if (xhr.readyState == 4 && xhr.status == 200) {
         var respuesta = xhr.responseText;
         console.log(respuesta);
-        var respuestaContainer = document.getElementById("fecha");
-        respuestaContainer.innerHTML = respuesta;
+        updated = true;
+        document.getElementById('loadingIndicatorPower').style.display = 'none';
+        revisarRespuesta();
+
         
         // Procesa la respuesta aquí, por ejemplo, actualizando el DOM o almacenándola en una variable
       }
@@ -59,6 +67,7 @@ function enviarRespuesta() {
     xhr.setRequestHeader("Content-Type", "application/json");
   
     xhr.send(data);
+  }
   }
   
 function procesarRespuesta() {
@@ -121,6 +130,7 @@ function procesarRespuesta() {
   }
 
   function regresar(){
+    updated = false;
     document.getElementById('myForm').style.display = 'block';
     var proceso = document.getElementById("proceso");
     document.getElementById('revisar').style.display = 'none';
