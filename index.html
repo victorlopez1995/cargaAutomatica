@@ -4,46 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
 </head>
 <body>
-    <div class="container">
-        <h1>Carga automatica 2.0</h1>
-        
-        <form method="POST" action="proceso1.py">
-            <div class="form-group">
-                <label for="status">Estado:</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="status" id="vigenteRadio" value="1" checked>
-                    <label class="form-check-label" for="vigenteRadio">
-                        Vigente
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="status" id="castigoRadio" value="2">
-                    <label class="form-check-label" for="castigoRadio">
-                        Castigo
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="status" id="renegociadoRadio" value="3">
-                    <label class="form-check-label" for="renegociadoRadio">
-                        Renegociado
-                    </label>
+    <div class="container" >
+      <div class="form-container">
+        <form id="myForm">
+          <fieldset>
+            <legend>Tipo</legend>
+  
+            <div class="radio">
+              <label>
+                <input type="radio" name="tipo" id="vigente" value="Vigente" checked>
+                Vigente
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="tipo" id="castigo" value="Castigo">
+                Castigo
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="tipo" id="renegociado" value="Renegociado">
+                Renegociado
+              </label>
+            </div>
+  
+            <button type="button" class="btn btn-primary" onclick="enviarRespuesta()"> Verificar</button>
+            <p id="fecha"></p>
+            <div class="response-container">
+                <div class="panel panel-default" id="respuestaContainer">
+                    <div class="panel-heading">Resumen</div>
                 </div>
             </div>
+            <button type="button" class="btn btn-primary" onclick="procesarRespuesta()"> Procesar</button>
 
-            <button type="submit" class="btn btn-primary" id="validarButton">Validar</button>
+          </fieldset>
         </form>
-
-        <div id="resultadoContainer">
+        <div id="loadingIndicator" class="text-center" style="display: none;">
+            <i class="fas fa-spinner fa-spin"></i> Cargando...
         </div>
+        <div id="alerta" style="display: none;"></div>
+        <div class="response-container" id="proceso" style="display: none;">
+            <div class="panel panel-default" id="respuestaProceso">
+                <div class="panel-heading">Resumen</div>
+            </div>
+        </div>
+        <div class="col-xs-12 btn-toolbar">
+          <button type="button" class="btn btn-primary" style="display: none;" id="revisar" onclick="revisarRespuesta()"> Revisar</button>
+          <button type="button" class="btn btn-primary" style="display: none;" id="regresar" onclick="regresar()"> Regresar</button>
+        </div>
+      </div>
     </div>
-
+    <div class="container dash" id="dash">
+        <iframe title="cargaInforme"  src="https://app.powerbi.com/view?r=eyJrIjoiYjViYTI1MmEtMjU2OS00NzJlLWJmN2QtNzEzOTUxZjViZTQ4IiwidCI6ImMyMzc5NDhhLTQzYjktNDMzMy1iYmUzLTk0Y2Q4MGNkMjU5YyJ9" frameborder="0" allowFullScreen="true"></iframe>
+      </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
-
+    <body> 
 </body>
 </html>
