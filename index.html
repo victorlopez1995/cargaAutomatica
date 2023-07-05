@@ -58,13 +58,13 @@
         <div class="col-xs-12 btn-toolbar">
           <button type="button" class="btn btn-primary" style="display: none;" id="revisar" onclick="UpdatePowerBi()"> Revisar</button>
           <button type="button" class="btn btn-primary" style="display: none;" id="regresar" onclick="regresar()"> Regresar</button>
+          <div id="loadingIndicatorPower" class="text-center" style="display: none;">
+            <i class="fas fa-spinner fa-spin"></i> Actualizando...
+          </div>
         </div>
       </div>
     </div>
     <div class="container dash" id="dash">
-        <div id="loadingIndicatorPower" class="text-center" style="display: none;">
-          <i class="fas fa-spinner fa-spin"></i> Actualizando...
-        </div>
         <iframe title="cargaInforme"  src="https://app.powerbi.com/view?r=eyJrIjoiYjViYTI1MmEtMjU2OS00NzJlLWJmN2QtNzEzOTUxZjViZTQ4IiwidCI6ImMyMzc5NDhhLTQzYjktNDMzMy1iYmUzLTk0Y2Q4MGNkMjU5YyJ9" frameborder="0" allowFullScreen="true"></iframe>
       </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
