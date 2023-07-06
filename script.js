@@ -48,7 +48,7 @@ function enviarRespuesta() {
     var xhr = new XMLHttpRequest();
     var url = "https://prod-09.brazilsouth.logic.azure.com:443/workflows/1cded6dc2a7740c9aca72ca89c03624b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Yg0eAqd8zlyeH4WzSVY1LYCBQrD7sp1iNGjhJa9MAVE"; // Reemplaza esto con la URL de tu desencadenador HTTP en Power Automate
     document.getElementById('loadingIndicatorPower').style.display = 'block';
-    // revisarRespuesta();
+    revisarRespuesta();
     var data = JSON.stringify({
       respuesta: "respuesta"
   });
@@ -58,7 +58,7 @@ function enviarRespuesta() {
         var respuesta = xhr.responseText;
         console.log(respuesta);
         updated = true;
-        revisarRespuesta();
+        // revisarRespuesta();
         document.getElementById('loadingIndicatorPower').style.display = 'none';
 
         
